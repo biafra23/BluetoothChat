@@ -155,6 +155,10 @@ public class BluetoothChatService  {
 
         // Start the thread to connect with the given device
         mConnectThread = new ConnectThread(device);
+        String address = device.getAddress();
+        Message message = mHandler.obtainMessage(BluetoothChat.MESSAGE_SAVE_DEVICE, 0, 0, address);
+        mHandler.sendMessage(message);
+
         mConnectThread.start();
         setState(STATE_CONNECTING);
     }

@@ -23,9 +23,12 @@ import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -56,6 +59,10 @@ public class BluetoothChat extends Activity {
     public static final int MESSAGE_WRITE = 3;
     public static final int MESSAGE_DEVICE_NAME = 4;
     public static final int MESSAGE_TOAST = 5;
+    public static final int MESSAGE_SAVE_DEVICE = 6;
+
+    // Pref keys
+    private static final String PREFS_LAST_DEVICE = "LastDevice";
 
     // Key names received from the BluetoothChatService Handler
     public static final String DEVICE_NAME = "device_name";
@@ -84,10 +91,14 @@ public class BluetoothChat extends Activity {
     private BluetoothChatService mChatService = null;
     private NotificationManager mNotificationManager;
 
+    private SharedPreferences prefs;
+	private Editor prefsEditor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefsEditor = prefs.edit();
         if (D) Log.e(TAG, "+++ ON CREATE +++");
 
         // Set up the window layout
@@ -146,6 +157,26 @@ public class BluetoothChat extends Activity {
             if (mChatService.getState() == BluetoothChatService.STATE_NONE) {
                 // Start the Bluetooth chat services
                 mChatService.start();
+
+              String address = prefs.getString(PREFS_LAST_DEVICE, null);
+              Log.i(TAG, " Address: " + address + " yeah!");
+              if (mChatService.getState() != BluetoothChatService.STATE_CONNECTED && address != null) {
+
+            	  if (mBluetoothAdapter.isDiscovering()) {
+            		  mBluetoothAdapter.cancelDiscovery();
+            	  }
+
+            	  // Get the BluetoothDevice object
+            	  BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
+
+
+
+            	  Log.i(TAG, " DeviceAddress:" + device.getAddress() + " yeah!");
+            	  Log.i(TAG, " DeviceName:" + device.getName() + " yeah!");
+
+            	  // Attempt to connect to the device
+            	  mChatService.connect(device);
+            	}
             }
         }
     }
@@ -311,6 +342,11 @@ public class BluetoothChat extends Activity {
                     Toast.makeText(getApplicationContext(), msg.getData().getString(TOAST),
                             Toast.LENGTH_SHORT).show();
                     break;
+            case MESSAGE_SAVE_DEVICE:
+            	String address = msg.obj.toString();
+            	prefsEditor.putString(PREFS_LAST_DEVICE, address);
+            	prefsEditor.commit();
+            	break;
             }
         }
     };
