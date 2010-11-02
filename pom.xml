@@ -9,75 +9,17 @@
     <name>BluetoothChat App</name>
 
     <dependencies>
-<!--
-        <dependency>
-            <groupId>com.jaeckel.locator</groupId>
-            <artifactId>LocatorLib</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
--->
+
         <dependency>
             <groupId>com.google.android</groupId>
             <artifactId>android</artifactId>
             <version>2.2.1</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>com.google.android.maps</groupId>
-            <artifactId>maps</artifactId>
-            <version>3_r3</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.2</version>
-        </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.slf4j</groupId>-->
-            <!--<artifactId>slf4j-simple</artifactId>-->
-            <!--<version>1.6.1</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-
-        <!-- for logging in LocatorLib -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-android</artifactId>
-            <version>1.6.1-RC1</version>
-        </dependency>
-        <!--<dependency>-->
-        <!--<groupId>roboguice</groupId>-->
-        <!--<artifactId>roboguice</artifactId>-->
-        <!--<version>1.0</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>com.google.inject</groupId>-->
-        <!--<artifactId>guice</artifactId>-->
-        <!--<version>2.0</version>-->
-        <!--</dependency>-->
-<!--
-        <dependency>
-            <groupId>org.bouncycastle2</groupId>
-            <artifactId>pgp</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.j256.ormlite</groupId>
-            <artifactId>ormlite-android</artifactId>
-            <version>3.5</version>
-        </dependency>
--->
-        <!--<dependency>-->
-        <!--<groupId>robo-guice</groupId>-->
-        <!--<artifactId>robo-guice</artifactId>-->
-        <!--</dependency>-->
 
     </dependencies>
     <build>
-<!--
-        <finalName>Beacon-${version}</finalName>
--->
+
         <finalName>${artifactId}</finalName>
         <sourceDirectory>src</sourceDirectory>
         <plugins>
@@ -103,62 +45,8 @@
                     <target>1.6</target>
                 </configuration>
             </plugin>
-            <!-- copy the artifact to where the Intellij Android plugin expects it -->
-<!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-installed</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>${project.artifactId}</artifactId>
-                                    <version>${project.version}</version>
-                                    <type>${project.packaging}</type>
-                                </artifactItem>
-                            </artifactItems>
-                            <outputDirectory>target/classes</outputDirectory>
-                            <stripVersion>true</stripVersion>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
--->
-            <!--<plugin>-->
-                <!--<groupId>com.pyx4me</groupId>-->
-                <!--<artifactId>proguard-maven-plugin</artifactId>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<phase>process-classes</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>proguard</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-                <!--<configuration>-->
-                    <!--<injar>android-classes</injar>-->
-                    <!--<libs>-->
-                        <!--<lib>/System/Library/Java/JavaVirtualMachines//1.6.0.jdk/Contents/Classes/classes.jar</lib>-->
-                        <!--&lt;!&ndash;<lib>${java.home}/lib/rt.jar</lib>&ndash;&gt;-->
-                    <!--</libs>-->
-                    <!--<obfuscate>false</obfuscate>-->
-                    <!--<options>-->
-                        <!--<option>-keep public class * extends android.app.Activity</option>-->
-                        <!--<option>-dontskipnonpubliclibraryclasses</option>-->
-                        <!--<option>-dontoptimize</option>-->
-                        <!--<option>-printmapping map.txt</option>-->
-                        <!--<option>-printseeds seed.txt</option>-->
-                        <!--<option>-ignorewarnings</option>-->
-                    <!--</options>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
+
+         
         </plugins>
     </build>
     <repositories>
@@ -168,21 +56,6 @@
             <url>http://download.java.net/maven/2/</url>
         </repository>
 
-        <!--<repository>-->
-        <!--<releases>-->
-        <!--<enabled>false</enabled>-->
-        <!--<updatePolicy>always</updatePolicy>-->
-        <!--<checksumPolicy>warn</checksumPolicy>-->
-        <!--</releases>-->
-        <!--<snapshots>-->
-        <!--<enabled>true</enabled>-->
-        <!--<updatePolicy>never</updatePolicy>-->
-        <!--<checksumPolicy>fail</checksumPolicy>-->
-        <!--</snapshots>-->
-        <!--<id>codehausSnapshots</id>-->
-        <!--<name>Codehaus Snapshots</name>-->
-        <!--<url>http://snapshots.maven.codehaus.org/maven2</url>-->
-        <!--<layout>default</layout>-->
-        <!--</repository>-->
+  
     </repositories>
 </project>
